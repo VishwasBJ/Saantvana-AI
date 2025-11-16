@@ -20,17 +20,20 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ activeTab, setActiveTab, user }: SidebarProps) {
-  const menuItems = [
-    { id: "mood", label: "Mood Analysis", icon: BarChart3 },
-    { id: "voice", label: "Voice Comfort", icon: Mic2 },
-    { id: "progress", label: "Progress", icon: TrendingUp },
-    { id: "quotes", label: "Inspiration", icon: Sparkles },
-    { id: "chat", label: "AI Chat", icon: MessageCircle },
-    { id: "journal", label: "Journal", icon: BookOpen },
-    { id: "resources", label: "Resources", icon: Library },
-    { id: "gamification", label: "Achievements", icon: Trophy },
-    { id: "crisis", label: "Crisis Help", icon: AlertTriangle },
-  ]
+ const menuItems = [
+  { id: "mood", label: "Mood Analysis", icon: BarChart3 },
+  { id: "voice", label: "Voice Comfort", icon: Mic2 },
+  { id: "progress", label: "Progress", icon: TrendingUp },
+  { id: "quotes", label: "Inspiration", icon: Sparkles },
+  { id: "chat", label: "AI Chat", icon: MessageCircle },
+  { id: "chatwithme", label: "Chat With Me", icon: MessageCircle },
+  { id: "stress", label: "Stress Detector", icon: AlertTriangle }, // <-- NEW
+  { id: "journal", label: "Journal", icon: BookOpen },
+  { id: "resources", label: "Resources", icon: Library },
+  { id: "gamification", label: "Achievements", icon: Trophy },
+  { id: "crisis", label: "Crisis Help", icon: AlertTriangle },
+]
+
 
   return (
     <div className="w-64 bg-sidebar border-r border-sidebar-border p-6 flex flex-col overflow-y-auto">
@@ -68,7 +71,9 @@ export default function Sidebar({ activeTab, setActiveTab, user }: SidebarProps)
       <div className="pt-4 border-t border-sidebar-border">
         <div className="bg-accent/20 rounded-lg p-3">
           <p className="text-xs font-semibold text-accent mb-1">Tip of the Day</p>
-          <p className="text-xs text-foreground/70">Remember, seeking help is a sign of strength, not weakness.</p>
+          <p className="text-xs text-foreground/70">
+            Remember, seeking help is a sign of strength, not weakness.
+          </p>
         </div>
       </div>
     </div>

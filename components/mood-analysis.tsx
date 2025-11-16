@@ -83,8 +83,8 @@ export default function MoodAnalysis({ ageGroup, age }: MoodAnalysisProps) {
       sad: ["sad", "down", "depressed", "lonely", "upset", "unhappy", "blue"],
       anxious: ["anxious", "worried", "nervous", "stressed", "fear", "panic", "overwhelmed"],
       stressed: ["stressed", "pressure", "burden", "exhausted", "tired", "drained"],
-      angry: ["angry", "frustrated", "mad", "furious", "irritated", "rage"],
-      calm: ["calm", "peaceful", "relaxed", "serene", "tranquil", "content"],
+      angry: ["angry", "frustrated", "mad", "furious", "irritated", "rage","kill","hate"],
+      calm: ["calm", "peaceful", "relaxed", "serene", "tranquil", "content","silent"],
     }
 
     for (const [emotion, keywords] of Object.entries(emotionKeywords)) {

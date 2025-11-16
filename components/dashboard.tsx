@@ -1,4 +1,5 @@
 "use client"
+import StressVideo from "./stress-video" // <-- import at top
 
 import { useState } from "react"
 import Sidebar from "./sidebar"
@@ -11,8 +12,10 @@ import Journal from "./journal"
 import CrisisResources from "./crisis-resources"
 import ResourceLibrary from "./resource-library"
 import WellnessGamification from "./wellness-gamification"
+import ChatWithMe from "./ui/chatwithme"
 import { Button } from "./ui/button"
 import { LogOut } from "lucide-react"
+
 
 interface DashboardProps {
   user: {
@@ -27,7 +30,18 @@ interface DashboardProps {
   onLogout: () => void
 }
 
-type TabType = "mood" | "voice" | "progress" | "quotes" | "chat" | "journal" | "crisis" | "resources" | "gamification"
+type TabType =
+  | "mood"
+  | "chatwithme"
+  | "stress"      // <-- new tab
+  | "voice"
+  | "progress"
+  | "quotes"
+  | "chat"
+  | "journal"
+  | "crisis"
+  | "resources"
+  | "gamification"
 
 export default function Dashboard({ user, onLogout }: DashboardProps) {
   const [activeTab, setActiveTab] = useState<TabType>("mood")
@@ -47,7 +61,9 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
         <div className="p-6 md:p-8">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h1 className="text-3xl font-bold text-foreground">Welcome back, {user.name}</h1>
+              <h1 className="text-3xl font-bold text-foreground">
+                Welcome back, {user.name}
+              </h1>
               <p className="text-muted-foreground mt-1">
                 {new Date().toLocaleDateString("en-US", {
                   weekday: "long",
@@ -56,13 +72,25 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
                 })}
               </p>
             </div>
-            <Button onClick={onLogout} variant="outline" className="rounded-lg gap-2 bg-transparent">
+            <Button
+              onClick={onLogout}
+              variant="outline"
+              className="rounded-lg gap-2 bg-transparent"
+            >
               <LogOut className="w-4 h-4" />
               Logout
             </Button>
           </div>
 
-          {activeTab === "mood" && <MoodAnalysis ageGroup={getAgeGroup(user.age)} age={user.age} />}
+          {/* Tab Content */}
+          {activeTab === "mood" && (
+            <MoodAnalysis ageGroup={getAgeGroup(user.age)} age={user.age} />
+          )}
+          
+// Inside your tab content rendering
+{activeTab === "stress" && <StressVideo />}
+
+          {activeTab === "chatwithme" && <ChatWithMe age={user.age} />}
           {activeTab === "voice" && <VoiceComfort />}
           {activeTab === "progress" && <ProgressTracker />}
           {activeTab === "quotes" && <QuotesSuggestions ageGroup={getAgeGroup(user.age)} />}
@@ -71,6 +99,8 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
           {activeTab === "crisis" && <CrisisResources />}
           {activeTab === "resources" && <ResourceLibrary />}
           {activeTab === "gamification" && <WellnessGamification />}
+          {activeTab === "stress" && <StressVideo />}
+
         </div>
       </div>
     </div>
