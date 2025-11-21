@@ -38,12 +38,10 @@ export default function Sidebar({ activeTab, setActiveTab, user }: SidebarProps)
   return (
     <div className="w-64 bg-sidebar border-r border-sidebar-border p-6 flex flex-col overflow-y-auto">
       <div className="mb-8">
-        <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mb-3">
-          <div className="w-8 h-8 rounded-lg bg-primary/40 flex items-center justify-center">
-            <span className="text-lg font-bold text-primary">🧠</span>
-          </div>
+        <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center mb-3">
+          <span className="text-2xl">🧠</span>
         </div>
-        <h2 className="text-xl font-bold text-sidebar-foreground">Calm Mind</h2>
+        <h2 className="text-xl font-bold gradient-primary-text">Calm Mind</h2>
         <p className="text-sm text-sidebar-foreground/60 mt-1">Mental Wellness AI</p>
       </div>
 
@@ -57,7 +55,7 @@ export default function Sidebar({ activeTab, setActiveTab, user }: SidebarProps)
               variant={activeTab === item.id ? "default" : "ghost"}
               className={`w-full justify-start gap-3 rounded-lg text-sm ${
                 activeTab === item.id
-                  ? "bg-sidebar-primary text-sidebar-primary-foreground"
+                  ? "gradient-primary text-white"
                   : "text-sidebar-foreground hover:bg-sidebar-accent/20"
               }`}
             >

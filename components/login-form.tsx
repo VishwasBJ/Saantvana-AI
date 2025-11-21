@@ -8,6 +8,8 @@ import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
+import GradientPicker from "@/components/gradient-picker"
+import WaveBackground from "@/components/wave-background"
 
 interface LoginFormProps {
   onLogin: (user: {
@@ -80,54 +82,96 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-blue-50 to-indigo-50">
-      <Card className="w-full max-w-md p-8 shadow-lg border-0">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-primary mb-2">Calm Mind</h1>
-          <p className="text-muted-foreground">Your AI companion for mental wellness</p>
+    <div className="min-h-screen gradient-primary relative overflow-hidden">
+      {/* Smooth Flowing Wave Background */}
+      <WaveBackground />
+
+      <GradientPicker />
+      
+      {/* Main Content Container */}
+      <div className="min-h-screen flex items-center justify-between px-8 md:px-16 lg:px-24 relative z-10">
+        {/* Left Side - Hero Text */}
+        <div className="flex-1 max-w-2xl pr-8 hidden lg:block">
+          <h1 className="text-7xl font-black mb-4 leading-[1.1] hero-text-outline">
+            <span className="tracking-tight">YOUR JOURNEY TO</span>
+            <br />
+            <span className="hero-text-filled">MENTAL WELLNESS</span>
+          </h1>
+          <p className="text-2xl text-white/95 mb-10 leading-relaxed font-light">
+            A safe space for your thoughts, powered by AI to support your emotional well-being.
+          </p>
+          
+          {/* CTA Button */}
+          <Button 
+            onClick={() => document.querySelector('input')?.focus()}
+            className="gradient-primary hover:opacity-90 text-white rounded-xl h-14 px-8 font-semibold text-lg shadow-2xl hover:shadow-3xl transition-all mb-8 group"
+          >
+            Start Your Wellness Journey
+            <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block">→</span>
+          </Button>
+          
+          <div className="flex gap-5 mt-8">
+            <div className="feature-badge">
+              🧠 AI-Powered Support
+            </div>
+            <div className="feature-badge">
+              🔒 Private & Secure
+            </div>
+          </div>
         </div>
 
-        {step === "login" ? (
-          <form onSubmit={handleLoginSubmit} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-1.5 text-foreground">Full Name</label>
-              <Input
-                type="text"
-                placeholder="Enter your full name"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="bg-secondary/20 border-secondary/30 rounded-xl"
-                required
-              />
+        {/* Right Side - Form Card */}
+        <div className="w-full lg:w-auto lg:min-w-[480px]">
+          <Card className="blended-card">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl gradient-primary mb-4 shadow-xl brain-icon-glow">
+                <span className="text-4xl">🧠</span>
+              </div>
+              <h2 className="text-4xl font-black gradient-primary-text mb-2 tracking-tight">CALM MIND</h2>
+              <p className="text-muted-foreground font-light">Your AI companion for mental wellness</p>
             </div>
-            <div>
-              <label className="block text-sm font-medium mb-1.5 text-foreground">Email Address</label>
-              <Input
-                type="email"
-                placeholder="Enter your email"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="bg-secondary/20 border-secondary/30 rounded-xl"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1.5 text-foreground">Contact Number</label>
-              <Input
-                type="tel"
-                placeholder="Enter your contact number"
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="bg-secondary/20 border-secondary/30 rounded-xl"
-                required
-              />
-            </div>
-            <Button
-              type="submit"
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl h-11 font-semibold"
-            >
-              Continue
-            </Button>
+
+            {step === "login" ? (
+          <form onSubmit={handleLoginSubmit} className="space-y-5">
+              <div>
+                <label className="block text-sm font-medium mb-2 text-foreground">Full Name</label>
+                <Input
+                  type="text"
+                  placeholder="Enter your full name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="blended-input"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2 text-foreground">Email Address</label>
+                <Input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="blended-input"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2 text-foreground">Contact Number</label>
+                <Input
+                  type="tel"
+                  placeholder="Enter your contact number"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="blended-input"
+                  required
+                />
+              </div>
+              <Button
+                type="submit"
+                className="blended-button"
+              >
+                Continue
+              </Button>
           </form>
         ) : step === "age" ? (
           <form onSubmit={handleAgeSubmit} className="space-y-6">
@@ -149,7 +193,7 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
             <div className="space-y-2">
               <Button
                 type="submit"
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl h-11 font-semibold"
+                className="w-full gradient-primary hover:opacity-90 text-white rounded-xl h-11 font-semibold"
               >
                 Continue
               </Button>
@@ -260,7 +304,7 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
             <div className="space-y-2">
               <Button
                 type="submit"
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl h-11 font-semibold"
+                className="w-full gradient-primary hover:opacity-90 text-white rounded-xl h-11 font-semibold"
               >
                 Get Started
               </Button>
@@ -278,8 +322,10 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
               </Button>
             </div>
           </form>
-        )}
-      </Card>
+            )}
+          </Card>
+        </div>
+      </div>
     </div>
   )
 }

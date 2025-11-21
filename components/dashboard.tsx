@@ -13,6 +13,7 @@ import CrisisResources from "./crisis-resources"
 import ResourceLibrary from "./resource-library"
 import WellnessGamification from "./wellness-gamification"
 import ChatWithMe from "./ui/chatwithme"
+import GradientPicker from "./gradient-picker"
 import { Button } from "./ui/button"
 import { LogOut } from "lucide-react"
 
@@ -56,12 +57,13 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
 
   return (
     <div className="flex h-screen bg-background">
+      <GradientPicker inDashboard={true} />
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} user={user} />
       <div className="flex-1 overflow-auto">
         <div className="p-6 md:p-8">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-between mb-8 mr-16">
             <div>
-              <h1 className="text-3xl font-bold text-foreground">
+              <h1 className="text-3xl font-bold gradient-primary-text">
                 Welcome back, {user.name}
               </h1>
               <p className="text-muted-foreground mt-1">
@@ -75,7 +77,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
             <Button
               onClick={onLogout}
               variant="outline"
-              className="rounded-lg gap-2 bg-transparent"
+              className="rounded-lg gap-2 bg-transparent hover:gradient-primary hover:text-white"
             >
               <LogOut className="w-4 h-4" />
               Logout

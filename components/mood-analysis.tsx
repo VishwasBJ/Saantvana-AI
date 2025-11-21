@@ -146,7 +146,7 @@ export default function MoodAnalysis({ ageGroup, age }: MoodAnalysisProps) {
           <Button
             onClick={handleAnalyzeMood}
             disabled={!moodInput.trim() || loading}
-            className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg w-full md:w-auto"
+            className="gradient-primary hover:opacity-90 text-white rounded-lg w-full md:w-auto"
           >
             {loading ? "Analyzing..." : "Analyze My Mood"}
           </Button>
@@ -195,8 +195,8 @@ export default function MoodAnalysis({ ageGroup, age }: MoodAnalysisProps) {
           </Card>
 
           {/* Motivational Quote */}
-          <Card className="p-6 border-0 shadow-sm bg-gradient-to-r from-primary/20 to-accent/20">
-            <p className="text-center text-lg italic text-foreground">
+          <Card className="p-6 border-0 shadow-sm gradient-primary">
+            <p className="text-center text-lg italic text-white font-medium">
               "You are stronger than your struggles. Take it one day at a time."
             </p>
           </Card>

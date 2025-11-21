@@ -205,7 +205,7 @@ export default function AIChat({ age, selectedCategories }: AIChatProps) {
           <Button
             type="submit"
             disabled={loading || !input.trim()}
-            className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl"
+            className="gradient-primary hover:opacity-90 text-white rounded-xl"
           >
             <Send className="w-4 h-4" />
           </Button>
