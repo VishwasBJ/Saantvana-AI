@@ -517,3 +517,271 @@
 
 
 
+
+/* Premium 3D Hero Animations */
+@keyframes gentle-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.6;
+  }
+}
+
+@keyframes character-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.02);
+  }
+}
+
+@keyframes icon-bounce {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-5px) rotate(5deg);
+  }
+  75% {
+    transform: translateY(5px) rotate(-5deg);
+  }
+}
+
+/* Smooth gradient shift for hero background */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+/* Enhanced 3D depth effect */
+.hero-3d-depth {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+/* Soft glow for text */
+.text-glow-soft {
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.3),
+    0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+/* Frosted glass effect for cards */
+.frosted-glass {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* Neon glow effect for wellness theme */
+.neon-glow-teal {
+  box-shadow: 
+    0 0 10px rgba(45, 212, 191, 0.5),
+    0 0 20px rgba(45, 212, 191, 0.3),
+    0 0 30px rgba(45, 212, 191, 0.2);
+}
+
+/* Smooth scale on hover */
+.hover-scale {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile Sidebar Transitions */
+@media (max-width: 1023px) {
+  .sidebar-mobile-enter {
+    transform: translateX(-100%);
+  }
+  
+  .sidebar-mobile-enter-active {
+    transform: translateX(0);
+    transition: transform 300ms ease-in-out;
+  }
+  
+  .sidebar-mobile-exit {
+    transform: translateX(0);
+  }
+  
+  .sidebar-mobile-exit-active {
+    transform: translateX(-100%);
+    transition: transform 300ms ease-in-out;
+  }
+}
+
+/* Hamburger Menu Animation */
+.hamburger-line {
+  transition: all 0.3s ease;
+}
+
+/* Prevent body scroll when mobile menu is open */
+.mobile-menu-open {
+  overflow: hidden;
+}
+
+/* Better mobile hero section spacing */
+@media (max-width: 640px) {
+  .hero-mobile-compact {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+/* Premium Hero Section Enhancements */
+
+/* Soft Text Glow for Headings */
+.text-glow-premium {
+  text-shadow: 
+    0 0 20px rgba(45, 212, 191, 0.4),
+    0 0 40px rgba(45, 212, 191, 0.3),
+    0 0 60px rgba(45, 212, 191, 0.2),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Glassmorphism Panel */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* Ultra-Soft Shadow for Floating Elements */
+.shadow-ultra-soft {
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.08),
+    0 4px 16px rgba(0, 0, 0, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* Ambient Glow Animation */
+@keyframes ambient-glow {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(45, 212, 191, 0.3),
+      0 0 40px rgba(45, 212, 191, 0.2),
+      0 0 60px rgba(45, 212, 191, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 30px rgba(45, 212, 191, 0.4),
+      0 0 60px rgba(45, 212, 191, 0.3),
+      0 0 90px rgba(45, 212, 191, 0.2);
+  }
+}
+
+.animate-ambient-glow {
+  animation: ambient-glow 4s ease-in-out infinite;
+}
+
+/* Layered Depth Shadow */
+.depth-shadow {
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 4px 8px rgba(0, 0, 0, 0.04),
+    0 8px 16px rgba(0, 0, 0, 0.04),
+    0 16px 32px rgba(0, 0, 0, 0.04);
+}
+
+/* Smooth Gradient Transition */
+.gradient-smooth {
+  background-size: 200% 200%;
+  animation: gradient-smooth-shift 8s ease infinite;
+}
+
+@keyframes gradient-smooth-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Premium Hover Effect for Icons */
+.icon-hover-premium {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.icon-hover-premium:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 
+    0 12px 48px rgba(0, 0, 0, 0.12),
+    0 6px 24px rgba(0, 0, 0, 0.08),
+    0 0 40px rgba(45, 212, 191, 0.2);
+}
+
+/* Calm Breathing Animation */
+@keyframes calm-breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.animate-calm-breathe {
+  animation: calm-breathe 6s ease-in-out infinite;
+}
+
+/* Soft Fade In */
+@keyframes soft-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-soft-fade-in {
+  animation: soft-fade-in 1s ease-out forwards;
+}
+
+/* Teal Mint Gradient Text */
+.text-teal-mint-gradient {
+  background: linear-gradient(135deg, #14B8A6 0%, #5EEAD4 50%, #6EE7B7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Premium Border Glow */
+.border-glow-premium {
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 
+    0 0 20px rgba(45, 212, 191, 0.2),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
+}

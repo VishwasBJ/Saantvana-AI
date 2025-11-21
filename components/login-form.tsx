@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
+import LogoIcon from "./logo-icon"
 import GradientPicker from "@/components/gradient-picker"
 import WaveBackground from "@/components/wave-background"
 
@@ -111,8 +112,8 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
           </Button>
           
           <div className="flex gap-5 mt-8">
-            <div className="feature-badge">
-              🧠 AI-Powered Support
+            <div className="feature-badge flex items-center gap-2">
+              <LogoIcon size={20} /> AI-Powered Support
             </div>
             <div className="feature-badge">
               🔒 Private & Secure
@@ -124,8 +125,8 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
         <div className="w-full lg:w-auto lg:min-w-[480px]">
           <Card className="blended-card">
             <div className="text-center mb-8">
-              <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl gradient-primary mb-4 shadow-xl brain-icon-glow">
-                <span className="text-4xl">🧠</span>
+              <div className="inline-flex items-center justify-center mb-4">
+                <LogoIcon size={80} />
               </div>
               <h2 className="text-4xl font-black gradient-primary-text mb-2 tracking-tight">CALM MIND</h2>
               <p className="text-muted-foreground font-light">Your AI companion for mental wellness</p>

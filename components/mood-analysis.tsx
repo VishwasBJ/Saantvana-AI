@@ -5,6 +5,7 @@ import { Button } from "./ui/button"
 import { Card } from "./ui/card"
 import { Input } from "./ui/input"
 import { Sparkles } from "lucide-react"
+import MoodHero from "./mood-hero"
 
 const STRESS_FACTORS: Record<string, string[]> = {
   adolescent: [
@@ -66,9 +67,10 @@ const COPING_SUGGESTIONS: Record<string, string[]> = {
 interface MoodAnalysisProps {
   ageGroup: string
   age: number
+  userName?: string
 }
 
-export default function MoodAnalysis({ ageGroup, age }: MoodAnalysisProps) {
+export default function MoodAnalysis({ ageGroup, age, userName }: MoodAnalysisProps) {
   const [moodInput, setMoodInput] = useState("")
   const [detectedEmotion, setDetectedEmotion] = useState<string | null>(null)
   const [response, setResponse] = useState<string | null>(null)
@@ -113,6 +115,9 @@ export default function MoodAnalysis({ ageGroup, age }: MoodAnalysisProps) {
 
   return (
     <div className="space-y-6">
+      {/* Premium Hero Section */}
+      <MoodHero userName={userName} />
+      
       {/* Stress Factors for Age Group */}
       <Card className="p-6 border-0 shadow-sm bg-secondary/30">
         <h2 className="text-lg font-semibold text-foreground mb-4">Common Stress Factors for Your Age Group</h2>
@@ -185,7 +190,7 @@ export default function MoodAnalysis({ ageGroup, age }: MoodAnalysisProps) {
             <div className="space-y-2">
               {suggestions.map((suggestion, idx) => (
                 <div key={idx} className="flex items-start gap-3 p-3 bg-primary/10 rounded-lg">
-                  <div className="w-6 h-6 rounded-full bg-primary/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div className="w-6 h-6 rounded-full bg-primary/30 flex items-center justify-center shrink-0 mt-0.5">
                     <span className="text-sm font-semibold text-primary">{idx + 1}</span>
                   </div>
                   <p className="text-foreground">{suggestion}</p>

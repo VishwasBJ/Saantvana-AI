@@ -2,6 +2,7 @@
 import StressVideo from "./stress-video" // <-- import at top
 
 import { useState } from "react"
+import { Menu, X } from "lucide-react"
 import Sidebar from "./sidebar"
 import MoodAnalysis from "./mood-analysis"
 import VoiceComfort from "./voice-comfort"
@@ -14,6 +15,7 @@ import ResourceLibrary from "./resource-library"
 import WellnessGamification from "./wellness-gamification"
 import ChatWithMe from "./ui/chatwithme"
 import GradientPicker from "./gradient-picker"
+import WaveBackgroundDashboard from "./wave-background-dashboard"
 import { Button } from "./ui/button"
 import { LogOut } from "lucide-react"
 
@@ -46,6 +48,7 @@ type TabType =
 
 export default function Dashboard({ user, onLogout }: DashboardProps) {
   const [activeTab, setActiveTab] = useState<TabType>("mood")
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   const getAgeGroup = (age: number) => {
     if (age >= 12 && age <= 18) return "adolescent"
@@ -56,37 +59,56 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
   }
 
   return (
-    <div className="flex h-screen bg-background">
+    <div className="flex h-screen bg-gray-50 relative overflow-hidden">
+      {/* Wave Background for Dashboard - Less Transparent */}
+      <WaveBackgroundDashboard />
+      
       <GradientPicker inDashboard={true} />
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} user={user} />
-      <div className="flex-1 overflow-auto">
-        <div className="p-6 md:p-8">
-          <div className="flex items-center justify-between mb-8 mr-16">
-            <div>
-              <h1 className="text-3xl font-bold gradient-primary-text">
-                Welcome back, {user.name}
-              </h1>
-              <p className="text-muted-foreground mt-1">
-                {new Date().toLocaleDateString("en-US", {
-                  weekday: "long",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </p>
-            </div>
-            <Button
-              onClick={onLogout}
-              variant="outline"
-              className="rounded-lg gap-2 bg-transparent hover:gradient-primary hover:text-white"
-            >
-              <LogOut className="w-4 h-4" />
-              Logout
-            </Button>
-          </div>
+      
+      {/* Mobile Hamburger Button - Calm Theme */}
+      <button
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+        className="lg:hidden fixed top-4 left-4 z-50 p-3 bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg hover:shadow-xl transition-all border border-teal-200/30 hover:bg-white/90"
+        aria-label="Toggle menu"
+      >
+        {isSidebarOpen ? (
+          <X className="w-6 h-6 text-teal-600" />
+        ) : (
+          <Menu className="w-6 h-6 text-teal-600" />
+        )}
+      </button>
+
+      {/* Mobile Overlay */}
+      {isSidebarOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/50 z-30 backdrop-blur-sm"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar - Hidden on mobile by default */}
+      <div
+        className={`fixed lg:relative inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        }`}
+      >
+        <Sidebar 
+          activeTab={activeTab} 
+          setActiveTab={(tab) => {
+            setActiveTab(tab)
+            setIsSidebarOpen(false) // Close sidebar on mobile after selection
+          }} 
+          user={user}
+          onLogout={onLogout}
+        />
+      </div>
+
+      <div className="flex-1 overflow-auto relative z-10 bg-linear-to-br from-gray-50/80 to-white/80 backdrop-blur-sm">
+        <div className="p-4 md:p-6 lg:p-6 pt-16 lg:pt-4">
 
           {/* Tab Content */}
           {activeTab === "mood" && (
-            <MoodAnalysis ageGroup={getAgeGroup(user.age)} age={user.age} />
+            <MoodAnalysis ageGroup={getAgeGroup(user.age)} age={user.age} userName={user.name} />
           )}
           
 // Inside your tab content rendering

@@ -1,6 +1,13 @@
 "use client"
 
-export default function WaveBackground() {
+interface WaveBackgroundProps {
+  intensity?: 'subtle' | 'normal' | 'strong'
+}
+
+export default function WaveBackground({ intensity = 'normal' }: WaveBackgroundProps) {
+  // Adjust opacity based on intensity
+  const opacityMultiplier = intensity === 'subtle' ? 0.7 : intensity === 'strong' ? 1.5 : 1
+  
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {/* 3D Floating Shapes */}
@@ -18,7 +25,7 @@ export default function WaveBackground() {
       <div className="sparkle sparkle-6"></div>
       
       {/* Wave Layer 1 - Bottom */}
-      <div className="absolute bottom-0 left-0 w-full h-full opacity-30">
+      <div className="absolute bottom-0 left-0 w-full h-full" style={{ opacity: 0.30 * opacityMultiplier }}>
         <svg
           className="absolute bottom-0 w-full h-full"
           xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +41,7 @@ export default function WaveBackground() {
       </div>
 
       {/* Wave Layer 2 - Middle */}
-      <div className="absolute bottom-0 left-0 w-full h-full opacity-25">
+      <div className="absolute bottom-0 left-0 w-full h-full" style={{ opacity: 0.25 * opacityMultiplier }}>
         <svg
           className="absolute bottom-0 w-full h-full"
           xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +57,7 @@ export default function WaveBackground() {
       </div>
 
       {/* Wave Layer 3 - Top */}
-      <div className="absolute bottom-0 left-0 w-full h-full opacity-20">
+      <div className="absolute bottom-0 left-0 w-full h-full" style={{ opacity: 0.20 * opacityMultiplier }}>
         <svg
           className="absolute bottom-0 w-full h-full"
           xmlns="http://www.w3.org/2000/svg"

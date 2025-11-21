@@ -4,6 +4,7 @@ import type React from "react"
 import { useState, useRef, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import LogoIcon from "./logo-icon"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -144,7 +145,9 @@ export default function AIChat({ age, selectedCategories }: AIChatProps) {
       <div className="flex-1 overflow-y-auto space-y-4 p-4 mb-4 bg-secondary/5 rounded-lg">
         {messages.length === 0 && (
           <div className="h-full flex flex-col items-center justify-center text-center space-y-3">
-            <div className="text-4xl">🧠</div>
+            <div className="flex justify-center">
+              <LogoIcon size={64} />
+            </div>
             <p className="text-muted-foreground">
               Hi, I'm your AI mental wellness companion. Feel free to share what's on your mind.
             </p>
