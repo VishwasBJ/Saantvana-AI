@@ -28,69 +28,94 @@ export default function WellnessGamification() {
   const [stats, setStats] = useState<WellnessStats>({
     streak: 0,
     totalCheckIns: 0,
-    badges: ["first-step"],
+    badges: [],
     lastCheckIn: null,
   })
+  const [averageMood, setAverageMood] = useState(0)
 
   useEffect(() => {
-    const saved = localStorage.getItem("wellness-stats")
-    if (saved) {
-      setStats(JSON.parse(saved))
-    }
-  }, [])
+    const loadStats = () => {
+      const saved = localStorage.getItem("wellness-stats")
+      if (saved) {
+        setStats(JSON.parse(saved))
+      }
 
-  const updateStreak = () => {
-    const today = new Date().toDateString()
-    const lastCheckIn = stats.lastCheckIn
-
-    let newStreak = stats.streak
-    if (lastCheckIn !== today) {
-      const lastDate = lastCheckIn ? new Date(lastCheckIn) : new Date(Date.now() - 24 * 60 * 60 * 1000)
-      const currentDate = new Date()
-
-      const diffTime = Math.abs(currentDate.getTime() - lastDate.getTime())
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-
-      if (diffDays === 1) {
-        newStreak += 1
-      } else if (diffDays > 1) {
-        newStreak = 1
+      // Calculate average mood from mood history
+      const moodHistory = localStorage.getItem("mood-history")
+      if (moodHistory) {
+        const moods = JSON.parse(moodHistory)
+        if (moods.length > 0) {
+          const total = moods.reduce((sum: number, entry: any) => sum + entry.mood, 0)
+          const avg = total / moods.length
+          setAverageMood(avg)
+        }
       }
     }
 
-    const newStats: WellnessStats = {
-      ...stats,
-      streak: newStreak,
-      totalCheckIns: stats.totalCheckIns + 1,
-      lastCheckIn: today,
-      badges: updateBadges(stats.badges, newStreak, stats.totalCheckIns + 1),
+    // Load initially
+    loadStats()
+
+    // Reload stats every 2 seconds to sync with mood tracker updates
+    const interval = setInterval(loadStats, 2000)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  // Check journal entries for journal-keeper badge
+  useEffect(() => {
+    const checkJournalBadge = () => {
+      try {
+        const journalEntries = localStorage.getItem("journal-entries")
+        if (journalEntries) {
+          const entries = JSON.parse(journalEntries)
+          if (entries.length >= 10 && !stats.badges.includes("journal-keeper")) {
+            const newStats = {
+              ...stats,
+              badges: [...stats.badges, "journal-keeper"],
+            }
+            setStats(newStats)
+            localStorage.setItem("wellness-stats", JSON.stringify(newStats))
+          }
+        }
+      } catch (error) {
+        console.error("Error checking journal badge:", error)
+      }
     }
 
-    setStats(newStats)
-    localStorage.setItem("wellness-stats", JSON.stringify(newStats))
-  }
-
-  const updateBadges = (currentBadges: string[], streak: number, checkIns: number): string[] => {
-    const newBadges = [...currentBadges]
-
-    if (streak >= 7 && !newBadges.includes("week-warrior")) {
-      newBadges.push("week-warrior")
-    }
-    if (streak >= 30 && !newBadges.includes("month-master")) {
-      newBadges.push("month-master")
-    }
-    if (checkIns >= 10 && !newBadges.includes("journal-keeper")) {
-      newBadges.push("journal-keeper")
-    }
-
-    return newBadges
-  }
+    checkJournalBadge()
+  }, [stats])
 
   const earnedAchievements = ACHIEVEMENTS.filter((a) => stats.badges.includes(a.id))
   const lockedAchievements = ACHIEVEMENTS.filter((a) => !stats.badges.includes(a.id))
 
   const streakPercentage = Math.min((stats.streak / 30) * 100, 100)
   const checkInPercentage = Math.min((stats.totalCheckIns / 50) * 100, 100)
+
+  const getMoodStars = (value: number) => {
+    if (value >= 1 && value <= 2) return 1
+    if (value >= 3 && value <= 4) return 2
+    if (value >= 5 && value <= 6) return 3
+    if (value >= 7 && value <= 9) return 4
+    if (value === 10) return 5
+    return 0
+  }
+
+  const renderStars = (count: number) => {
+    return (
+      <div className="flex gap-1">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <Star
+            key={star}
+            className={`w-4 h-4 ${
+              star <= count
+                ? "fill-yellow-400 text-yellow-400"
+                : "fill-gray-200 text-gray-200 dark:fill-gray-700 dark:text-gray-700"
+            }`}
+          />
+        ))}
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-6">
@@ -117,7 +142,15 @@ export default function WellnessGamification() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-muted-foreground">Total Check-Ins</p>
-              <p className="text-3xl font-bold text-blue-500">{stats.totalCheckIns}</p>
+              <div className="flex items-center gap-3">
+                <p className="text-3xl font-bold text-blue-500">{stats.totalCheckIns}</p>
+                {averageMood > 0 && renderStars(getMoodStars(averageMood))}
+              </div>
+              {averageMood > 0 && (
+                <p className="text-xs text-muted-foreground mt-1">
+                  Avg Mood: {averageMood.toFixed(1)}/10
+                </p>
+              )}
             </div>
             <Star className="w-10 h-10 text-yellow-500" />
           </div>
