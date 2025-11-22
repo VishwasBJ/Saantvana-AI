@@ -1,5 +1,6 @@
 "use client"
 import StressVideo from "./stress-video" // <-- import at top
+import StressDetectorPage from "./stress-detector-page" // <-- NEW: AI Emotion Detector
 
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
@@ -110,6 +111,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
           {activeTab === "mood" && (
             <MoodAnalysis ageGroup={getAgeGroup(user.age)} age={user.age} userName={user.name} />
           )}
+
           {activeTab === "chatwithme" && <ChatWithMe age={user.age} />}
           {activeTab === "voice" && <VoiceComfort />}
           {activeTab === "progress" && <ProgressTracker />}
@@ -119,7 +121,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
           {activeTab === "crisis" && <CrisisResources />}
           {activeTab === "resources" && <ResourceLibrary />}
           {activeTab === "gamification" && <WellnessGamification />}
-          {activeTab === "stress" && <StressVideo />}
+          {activeTab === "stress" && <StressDetectorPage />}
 
         </div>
       </div>
