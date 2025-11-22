@@ -110,10 +110,6 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
           {activeTab === "mood" && (
             <MoodAnalysis ageGroup={getAgeGroup(user.age)} age={user.age} userName={user.name} />
           )}
-          
-// Inside your tab content rendering
-{activeTab === "stress" && <StressVideo />}
-
           {activeTab === "chatwithme" && <ChatWithMe age={user.age} />}
           {activeTab === "voice" && <VoiceComfort />}
           {activeTab === "progress" && <ProgressTracker />}

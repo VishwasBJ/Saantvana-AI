@@ -185,11 +185,11 @@ export default function AIChat({ age }: AIChatProps) {
         }),
       })
 
-      if (!response.ok) {
-        throw new Error("Failed to get response from AI")
-      }
-
       const data = await response.json()
+      
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to get response from AI")
+      }
       
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
